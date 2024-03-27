@@ -18,6 +18,15 @@ exports.getAllProducts = async (req, res) => {
     });
 }
 
+// Get a single product details
+exports.getProductDetail = async (req,res,next) => {
+    let product = await Product.findById(req.params);
+    if(!product){
+        return res.status(400).json({success : false, msg : "Product not found"})
+    }
+    res.status(200).json({success : true, product})
+}
+
 // Update product -- Admin
 exports.updateProduct = async (req, res,next) => {
     let product = await Product.findById(req.params.id);
