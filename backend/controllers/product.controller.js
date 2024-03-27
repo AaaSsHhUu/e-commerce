@@ -20,11 +20,15 @@ exports.getAllProducts = async (req, res) => {
 
 // Get a single product details
 exports.getProductDetail = async (req,res,next) => {
-    let product = await Product.findById(req.params);
-    if(!product){
-        return res.status(400).json({success : false, msg : "Product not found"})
+    try{
+        let product = await Product.findById(req.params.id);
+        if(!product){
+            return res.status(400).json({success : false, msg : "Product not found"})
+        }
+        res.status(200).json({success : true, product})
+    }catch(err){
+        res.status(500).json({success : false,error : err})
     }
-    res.status(200).json({success : true, product})
 }
 
 // Update product -- Admin
