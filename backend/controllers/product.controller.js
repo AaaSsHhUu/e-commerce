@@ -19,7 +19,7 @@ exports.getAllProducts = async (req, res) => {
 }
 
 // Update product -- Admin
-exports.updateProduct = async (req, res) => {
+exports.updateProduct = async (req, res,next) => {
     let product = await Product.findById(req.params.id);
 
     if (!product) {
@@ -42,4 +42,14 @@ exports.updateProduct = async (req, res) => {
     }catch(err){
         res.status(500).json({success : false, error : err})
     }
+}
+
+//  Delete Produce --Admin
+exports.deleteProduct = async (req,res,next)=>{
+    const product = await Product.findByIdAndDelete(req.params.id,{new : true});
+
+    if(!product){
+        return res.status(400).json({success : false, msg : "Product not found"})
+    }
+    res.status(200).json({success : true, msg : "Product Removed Successfully", product});
 }
