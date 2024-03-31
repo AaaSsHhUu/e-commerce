@@ -4,6 +4,7 @@ exports.connectDB = () => {
     .then((data) => {
         console.log("Mongodb connected to server ", data.connection.host);
     }).catch((err) => {
-        console.log("Mongodb error : ", err);
+        console.log("Mongodb error : ", err.message);
+        process.exit(1);
     })
 }
