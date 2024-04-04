@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -38,6 +39,19 @@ const userSchema = new mongoose.Schema({
         type : Date
     }
 })
+
+userSchema.pre("save", async function(next){
+    // password should only change if it is modified by the user or when first time created
+    if(!this.isModified("password")){
+        return next();
+    }
+    else{
+        this.password = await bcrypt.hash(this.password,10)
+        next();
+    }
+})
+
+
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
