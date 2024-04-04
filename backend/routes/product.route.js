@@ -2,7 +2,8 @@ const express = require("express");
 const { getAllProducts, createProduct, updateProduct, deleteProduct, getProductDetail } = require("../controllers/product.controller");
 const router = express.Router();
 const asyncHandler = require("../middleware/asyncHandler");
-const { validateUser, validateProduct } = require("../middleware/validation");
+const { validateProduct } = require("../middleware/validation");
+
 
 router.route("/products").get(asyncHandler(getAllProducts))
 
