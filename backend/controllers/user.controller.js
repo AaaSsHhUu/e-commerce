@@ -12,9 +12,10 @@ const registerUser = async (req,res,next)=>{
             url : "sampleUrl" 
         }
     })
+    const token = user.generateAccessToken();
     res.status(201).json({
         success : true,
-        user
+        token
     })
 }
 
