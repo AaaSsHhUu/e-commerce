@@ -51,6 +51,11 @@ userSchema.pre("save", async function(next){
     }
 })
 
+//  Adding methods in userSchema
+userSchema.methods.isPasswordCorrect = async function(password){
+    return await bcrypt.compare(password,this.password);
+}
+
 
 
 const User = mongoose.model("User", userSchema);
