@@ -1,5 +1,6 @@
 const ErrorHandler = require("../utils/errorHandler");
 const User = require("../models/user.model");
+const sendToken = require('../utils/generateToken');
 
 const registerUser = async (req,res,next)=>{
     let {name, email, password} = req.body;
@@ -12,11 +13,7 @@ const registerUser = async (req,res,next)=>{
             url : "sampleUrl" 
         }
     })
-    const token = user.generateAccessToken();
-    res.status(201).json({
-        success : true,
-        token
-    })
+    sendToken(user,res,200);
 }
 
 const loginUser = async (req,res) => {
@@ -35,11 +32,7 @@ const loginUser = async (req,res) => {
         return next(new ErrorHandler(401, "Invalid email or password"));
     }
 
-    const token = user.generateAccessToken();
-    res.status(200).json({
-        success : true,
-        token
-    })
+    sendToken(user,res,201);
 }
 
 module.exports = {registerUser, loginUser}
