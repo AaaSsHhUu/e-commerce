@@ -19,4 +19,27 @@ const registerUser = async (req,res,next)=>{
     })
 }
 
-module.exports = {registerUser}
+const loginUser = async (req,res) => {
+    let {email, password}  = req.body;
+    if(!email || !password){
+        return next(new ErrorHandler(400, "Invalid email or password"));
+    }
+
+    const user = await User.findOne({email}).select("+password");
+    if(!user){
+        return next(new ErrorHandler(401, "Invalid email or password"));
+    }
+
+    const checkPassword = user.isPasswordCorrect(password);
+    if(!checkPassword){
+        return next(new ErrorHandler(401, "Invalid email or password"));
+    }
+
+    const token = user.generateAccessToken();
+    res.status(200).json({
+        success : true,
+        token
+    })
+}
+
+module.exports = {registerUser, loginUser}
