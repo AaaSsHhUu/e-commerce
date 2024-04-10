@@ -60,7 +60,6 @@ const productSchema = new mongoose.Schema({
     madeBy : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "User",
-        required : true
     }
 },{timestamps : true})
 

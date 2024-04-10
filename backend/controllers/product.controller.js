@@ -4,6 +4,7 @@ const ErrorHandler = require("../utils/errorHandler");
 
 // Create Product --Admin
 exports.createProduct = async (req, res, next) => {
+    req.body.madeBy = req.user._id;
     let product = await Product.create(req.body);
     res.status(201).json({
         success: true,
