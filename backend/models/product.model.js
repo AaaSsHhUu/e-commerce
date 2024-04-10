@@ -56,7 +56,12 @@ const productSchema = new mongoose.Schema({
                 required : true
             }
         }
-    ]
+    ],
+    madeBy : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User",
+        required : true
+    }
 },{timestamps : true})
 
 const Product = mongoose.model("Product",productSchema);
