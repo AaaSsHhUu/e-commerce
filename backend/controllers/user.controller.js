@@ -36,9 +36,9 @@ const loginUser = async (req,res) => {
 }
 
 const logoutUser = async (req,res) => {
-    req.cookie("token",null,{
+    res.cookie("token",null,{
         httpOnly : true,
-        expiresIn : newDate(Date.now())
+        expiresIn : new Date(Date.now())
     })
     res.status(200).json({
         success : true,
