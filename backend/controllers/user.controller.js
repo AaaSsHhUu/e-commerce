@@ -35,4 +35,14 @@ const loginUser = async (req,res) => {
     sendToken(user,res,201);
 }
 
-module.exports = {registerUser, loginUser}
+const logoutUser = async (req,res) => {
+    req.cookie("token",null,{
+        httpOnly : true,
+        expiresIn : newDate(Date.now())
+    })
+    res.status(200).json({
+        success : true,
+        message : "Logged out successfully"
+    })
+}
+module.exports = {registerUser, loginUser, logoutUser}
