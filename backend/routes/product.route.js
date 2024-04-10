@@ -3,16 +3,16 @@ const { getAllProducts, createProduct, updateProduct, deleteProduct, getProductD
 const router = express.Router();
 const asyncHandler = require("../middleware/asyncHandler");
 const { validateProduct } = require("../middleware/validation");
-const isAuthenticated = require("../middleware/auth");
+const { isAuthenticated, authorizeRoles } = require("../middleware/auth");
 
 
 router.route("/products").get(asyncHandler(getAllProducts))
 
-router.route("/product/new").post(isAuthenticated, validateProduct, asyncHandler(createProduct))
+router.route("/product/new").post(isAuthenticated, authorizeRoles("admin"), validateProduct, asyncHandler(createProduct))
 
 router.route("/product/:id")
     .get(asyncHandler(getProductDetail))
-    .put(asyncHandler(isAuthenticated, updateProduct))
-    .delete(asyncHandler(isAuthenticated, deleteProduct))
+    .put(asyncHandler(isAuthenticated, authorizeRoles("admin"), updateProduct))
+    .delete(asyncHandler(isAuthenticated, authorizeRoles("admin"), deleteProduct))
 
 module.exports = router;
