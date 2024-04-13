@@ -72,7 +72,7 @@ userSchema.methods.generateAccessToken =  function(){
             )
 }
 
-// Generating Password Rest Token
+// Generating Reset Password Token
 userSchema.methods.getResetPasswordToken = function(){
     // Generating token
     const resetToken = crypto.randomBytes(20).toString("hex");
