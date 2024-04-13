@@ -47,7 +47,7 @@ const logoutUser = async (req,res) => {
     })
 }
 
-const resetPassword = async(req,res,next) => {
+const forgotPassword = async(req,res,next) => {
     const user = await User.findOne({email : req.body.email});
 
     if(!user){
@@ -82,4 +82,8 @@ const resetPassword = async(req,res,next) => {
         return next(new ErrorHandler(500, err.message))
     }
 }
-module.exports = {registerUser, loginUser, logoutUser, resetPassword}
+
+const resetPassword = () => {
+    
+}
+module.exports = {registerUser, loginUser, logoutUser,forgotPassword, resetPassword}
