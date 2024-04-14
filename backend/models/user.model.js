@@ -79,9 +79,11 @@ userSchema.methods.getResetPasswordToken = function(){
 
     // Hashing and setting resetPasswordToken to userSchema
     this.resetPasswordToken = crypto
-        .createHash("sha256")
-        .update(resetToken)
-        .digest("hex")
+        .createHash("sha256") // generate hash (64 characters in hexadecimal format)
+        .update(resetToken) //  used to update the Hash object with the data to be hashed
+        .digest("hex") //  "digest" of data refers to a fixed-size output
+        // .digest() method computes the digest of the data that has been updated so far.
+        // "hex" specifies the encoding format of the digest. In this case, it specifies that the digest should be returned as a hexadecimal string.
 
     this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
