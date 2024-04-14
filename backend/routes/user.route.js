@@ -10,6 +10,6 @@ router.route("/login").post(asyncHandler(loginUser));
 
 router.route("/logout").get(logoutUser);
 
-router.route("/password/reset").post(asyncHandler(forgotPassword))
+router.route("/password/forgot").post(asyncHandler(forgotPassword))
 
 module.exports = router;
