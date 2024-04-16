@@ -10,6 +10,13 @@ module.exports = (err,req,res,next) => {
         err = new ErrorHandler(400,message);
     }
 
+    // MongoDB duplicate key error
+    if(err.code === 11000){
+        const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
+        // console.log(err);
+        err = new ErrorHandler(400, message);
+    }
+
     res.status(err.status).json({
         success : false,
         message : err.message,
