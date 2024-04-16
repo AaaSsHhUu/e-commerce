@@ -20,6 +20,7 @@ module.exports = (err,req,res,next) => {
     // JWT error
     if(err.name === "JsonWebTokenError"){
         const message = `Invalid jwt token, try again!!!`;
+        // console.log(err);
         err = new ErrorHandler(400, message)
     }
 
