@@ -127,4 +127,24 @@ const getUserDetails = async (req,res,next) => {
     })
 }
 
-module.exports = {registerUser, loginUser, logoutUser,forgotPassword, resetPassword, getUserDetails};
+// Update user password
+const updatePassword = async(req,res,next) => {
+    // find user
+    const user = await User.findById(req.user._id).select("+password");
+    // give old password
+    const checkPassword = await user.isPasswordCorrect(req.body.oldPassword);
+
+    if(!checkPassword){
+        return next(new ErrorHandler(400, "Incorrect Old password"));
+    }
+    // new password === confirm password
+    if(req.body.newPassword !== req.body.confirmPassword){
+        return next(new ErrorHandler(400, "Incorrect password"));
+    }
+    // save newPassword as password
+    user.password = req.body.newPassword;
+    await user.save();
+
+    sendToken(user,res,200);
+}
+module.exports = {registerUser, loginUser, logoutUser,forgotPassword, resetPassword, getUserDetails, updatePassword};
