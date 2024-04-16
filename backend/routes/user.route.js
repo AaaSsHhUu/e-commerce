@@ -8,8 +8,11 @@ router.route("/register").post(validateUser, asyncHandler(registerUser));
 
 router.route("/login").post(asyncHandler(loginUser));
 
+router.route("/password/forgot").post(asyncHandler(forgotPassword))
+
+router.route("/password/reset/:token").put(asyncHandler(resetPassword))
+
 router.route("/logout").get(logoutUser);
 
-router.route("/password/forgot").post(asyncHandler(forgotPassword))
 
 module.exports = router;
