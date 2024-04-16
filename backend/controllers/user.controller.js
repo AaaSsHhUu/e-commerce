@@ -116,4 +116,15 @@ const resetPassword = async (req,res,next) => {
 
     sendToken(user,res,200);
 }
-module.exports = {registerUser, loginUser, logoutUser,forgotPassword, resetPassword}
+
+// get user details
+const getUserDetails = async (req,res,next) => {
+    const user = await User.findById(req.user._id);
+
+    res.status(200).json({
+        success : true,
+        user
+    })
+}
+
+module.exports = {registerUser, loginUser, logoutUser,forgotPassword, resetPassword, getUserDetails};
