@@ -18,7 +18,7 @@ const registerUser = async (req,res,next)=>{
     sendToken(user,res,200);
 }
 
-const loginUser = async (req,res) => {
+const loginUser = async (req,res,next) => {
     let {email, password}  = req.body;
     if(!email || !password){
         return next(new ErrorHandler(400, "Invalid email or password"));
@@ -29,7 +29,7 @@ const loginUser = async (req,res) => {
         return next(new ErrorHandler(401, "Invalid email or password"));
     }
 
-    const checkPassword = user.isPasswordCorrect(password);
+    const checkPassword = await user.isPasswordCorrect(password);
     if(!checkPassword){
         return next(new ErrorHandler(401, "Invalid email or password"));
     }
@@ -58,7 +58,7 @@ const forgotPassword = async(req,res,next) => {
     // Get reset password token
     const resetToken = await user.getResetPasswordToken();
     await user.save({validateBeforeSave : false});
-
+    // console.log("user after reset save : ", user);
     const resetPasswordUrl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
 
     const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\n If you have not requested to reset your password, then please don't open it.`
@@ -90,11 +90,15 @@ const resetPassword = async (req,res,next) => {
         .createHash("sha256")
         .update(req.params.token)
         .digest("hex")
+
+    // console.log("resetPassword token of url ",resetPasswordToken);
     
     const user = await User.findOne({
         resetPasswordToken : resetPasswordToken,
         resetPasswordExpire : {$gt : Date.now()}
     });
+
+    // console.log("user : ", user);
 
     if(!user){
         return next(new ErrorHandler(400, "Reset Password is Invalid or has been expired"));
