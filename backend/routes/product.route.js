@@ -8,10 +8,11 @@ const { isAuthenticated, authorizeRoles } = require("../middleware/auth");
 
 router.route("/products").get(asyncHandler(getAllProducts))
 
-router.route("/product/new").post(isAuthenticated, authorizeRoles("admin"), validateProduct, asyncHandler(createProduct))
+router.route("/admin/product/new").post(isAuthenticated, authorizeRoles("admin"), validateProduct, asyncHandler(createProduct))
 
-router.route("/product/:id")
-    .get(asyncHandler(getProductDetail))
+router.route("/product/:id").get(asyncHandler(getProductDetail))
+
+router.route("/admin/product/:id")
     .put(asyncHandler(isAuthenticated, authorizeRoles("admin"), updateProduct))
     .delete(asyncHandler(isAuthenticated, authorizeRoles("admin"), deleteProduct))
 
