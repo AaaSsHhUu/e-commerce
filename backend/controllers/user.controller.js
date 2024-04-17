@@ -175,4 +175,18 @@ const getAllUsers = async (req,res,next) => {
     })
 }
 
-module.exports = { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers };
+// Get a particular user's details (--Admin--)
+const getUserDetailsForAdmin = async (req,res,next) => {
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler(404,`User does not exists with ID : ${req.params.id}`))
+    }
+
+    res.status(200).json({
+        success : true,
+        user
+    })
+}
+
+module.exports = { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers, getUserDetailsForAdmin };
