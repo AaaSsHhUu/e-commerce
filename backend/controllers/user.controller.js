@@ -164,4 +164,15 @@ const updateUserProfile = async (req, res, next) => {
 
     res.status(200).json({ success: true })
 }
-module.exports = { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile };
+
+// Get user details (--Admin--)
+const getAllUsers = async (req,res,next) => {
+    const users = await User.find();
+
+    res.status(200).json({
+        success : true,
+        users
+    })
+}
+
+module.exports = { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers };
