@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 const sendToken = require('../utils/generateToken');
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto");
+const asyncHandler = require("../middleware/asyncHandler");
 
 const registerUser = async (req, res, next) => {
     let { name, email, password } = req.body;
@@ -189,4 +190,46 @@ const getUserDetailsForAdmin = async (req,res,next) => {
     })
 }
 
-module.exports = { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers, getUserDetailsForAdmin };
+// update someone's role in profile -- Admin --
+const updateUserProfileByAdmin = async(req,res,next)=>{
+    const newUserProfile = {
+        name : req.body.name,
+        email : req.body.email,
+        role : req.body.role
+    }
+
+    const user = await User.findByIdAndUpdate(
+        req.params.id,
+        newUserProfile,
+        {
+            new : true,
+            runValidators : true
+        }
+    )
+
+    if(!user){
+        return next(new ErrorHandler(500, "Some Error occured while updating user profile"));
+    }
+    
+    res.status(200).json({
+        success : true,
+        user
+    })
+}
+
+// Delete user -- Admin --
+
+const deleteUser = async (req,res,next) => {
+    const user = await User.findByIdAndDelete(req.params.id);
+    // we'll remove cloudinary files later
+    if(!user){
+        return next(new ErrorHandler(500, "Some Error occured while deleting user"));
+    }
+
+    res.status(200).json({
+        success : true,
+        message : `${user.name} deleted successfully`
+    })
+}
+
+module.exports = { registerUser, loginUser, logoutUser, forgotPassword, resetPassword, getUserDetails, updateUserPassword, updateUserProfile, getAllUsers, getUserDetailsForAdmin, updateUserProfileByAdmin, deleteUser };
