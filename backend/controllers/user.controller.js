@@ -170,6 +170,8 @@ const updateUserProfile = async (req, res, next) => {
     res.status(200).json({ success: true })
 }
 
+// ------------- ADMIN CONTROLLERS -------------------
+
 // Get user details (--Admin--)
 const getAllUsers = async (req,res,next) => {
     const users = await User.find();
