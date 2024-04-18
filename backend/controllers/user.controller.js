@@ -163,6 +163,10 @@ const updateUserProfile = async (req, res, next) => {
         runValidators: true,
     })
 
+    if(!user){
+        return next(new ErrorHandler(500, "Some Error occured while updating user profile"));
+    }
+
     res.status(200).json({ success: true })
 }
 
