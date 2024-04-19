@@ -66,3 +66,24 @@ exports.deleteProduct = async (req,res,next)=>{
     }
     res.status(200).json({success : true, msg : "Product Removed Successfully", product});
 }
+
+// create new review and update review
+const createProductReview = async(req,res,next) => {
+    const {rating, comment, productId} = req.body;
+    const review = {
+        user : req.user._id,
+        name : req.user.name,
+        rating,
+        comment
+    }
+
+    const product = await Product.findById(productId);
+
+    const isReviewed = product.reviews.find((rev) => rev.user.toString() === req.user_id)
+    if(isReviewed){
+
+    }
+    else{
+        product.reviews.push(review)
+    }
+}
