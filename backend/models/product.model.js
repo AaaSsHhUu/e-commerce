@@ -17,7 +17,8 @@ const productSchema = new mongoose.Schema({
     },
     avgRating : {
         type : Number,
-        default : 0
+        default : 0,
+        max : 5
     },
     image : [
         {
@@ -58,7 +59,8 @@ const productSchema = new mongoose.Schema({
             },
             rating : {
                 type : Number,
-                required : true
+                required : true,
+                max : 5
             },
             comment : {
                 type : String,
