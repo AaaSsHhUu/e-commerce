@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllProducts, createProduct, updateProduct, deleteProduct, getProductDetail } = require("../controllers/product.controller");
+const { getAllProducts, createProduct, updateProduct, deleteProduct, getProductDetail, createProductReview } = require("../controllers/product.controller");
 const router = express.Router();
 const asyncHandler = require("../middleware/asyncHandler");
 const { validateProduct } = require("../middleware/validation");
@@ -15,5 +15,7 @@ router.route("/product/:id").get(asyncHandler(getProductDetail))
 router.route("/admin/product/:id")
     .put(asyncHandler(isAuthenticated, authorizeRoles("admin"), updateProduct))
     .delete(asyncHandler(isAuthenticated, authorizeRoles("admin"), deleteProduct))
+
+router.route("/review").put(isAuthenticated, asyncHandler(createProductReview));
 
 module.exports = router;
