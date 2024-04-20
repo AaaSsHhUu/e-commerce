@@ -66,3 +66,48 @@ exports.deleteProduct = async (req,res,next)=>{
     }
     res.status(200).json({success : true, msg : "Product Removed Successfully", product});
 }
+
+// create new review and update review
+exports.createProductReview = async(req,res,next) => {
+    const {rating, comment, productId} = req.body;
+    const review = {
+        user : req.user._id,
+        name : req.user.name,
+        rating : Number(rating),
+        comment
+    }
+
+    const product = await Product.findById(productId);
+
+    const isReviewed =  product.reviews.find((rev) => rev.user.toString() === req.user_id)
+    // if user is updating the review
+    if(isReviewed){
+        product.reviews.forEach((rev) => {
+            if(rev.user.toString() === req.user._id.toString()){
+                rev.rating = rating
+                rev.comment = comment
+            }
+        })
+    }
+    // user is adding a new review
+    else{
+        product.reviews.push(review)
+        product.numOfReviews = product.reviews.length
+    }
+    // Calculating new average rating
+    let sum = 0;
+    product.reviews.forEach((rev) => {
+        sum += rev.rating;
+    })
+
+    product.avgRating = sum/(product.numOfReviews);
+
+    const updatedProduct = await product.save({validateBeforeSave : false})
+    if(!updatedProduct){
+        return next(new ErrorHandler(500, "Something went wrong while updating review"));
+    }
+    res.status(200).json({
+        success : true,
+        updatedProduct
+    })
+}
