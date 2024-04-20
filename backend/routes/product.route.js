@@ -13,8 +13,8 @@ router.route("/admin/product/new").post(isAuthenticated, authorizeRoles("admin")
 router.route("/product/:id").get(asyncHandler(getProductDetail))
 
 router.route("/admin/product/:id")
-    .put(asyncHandler(isAuthenticated, authorizeRoles("admin"), updateProduct))
-    .delete(asyncHandler(isAuthenticated, authorizeRoles("admin"), deleteProduct))
+    .put(isAuthenticated, authorizeRoles("admin"), asyncHandler(updateProduct))
+    .delete(isAuthenticated, authorizeRoles("admin"), asyncHandler(deleteProduct))
 
 router.route("/review").put(isAuthenticated, asyncHandler(createProductReview));
 
