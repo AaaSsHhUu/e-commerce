@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema({
         max : [10000000,"Price cannot exceed 1cr"],
         required : [true, "Price is required"]
     },
-    rating : {
+    avgRating : {
         type : Number,
         default : 0
     },
