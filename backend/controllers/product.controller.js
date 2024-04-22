@@ -14,7 +14,7 @@ exports.createProduct = async (req, res, next) => {
 
 // Get all Products
 exports.getAllProducts = async (req, res) => {
-    const resultPerPage = 5;
+    const resultPerPage = 15;
     const productCount = await Product.countDocuments();
     const apiFeature = new ApiFeatures(Product.find(),req.query).search().filter().pagination(resultPerPage);
     let products = await apiFeature.query;
@@ -78,8 +78,11 @@ exports.createProductReview = async(req,res,next) => {
     }
 
     const product = await Product.findById(productId);
-
-    const isReviewed =  product.reviews.find((rev) => rev.user.toString() === req.user_id)
+    console.log("Product : ",product);
+    const isReviewed =  product.reviews.find((rev) =>{
+        return (rev.user.toString() === req.user._id.toString())
+    })
+    console.log("isReviewed : ",isReviewed);
     // if user is updating the review
     if(isReviewed){
         product.reviews.forEach((rev) => {
