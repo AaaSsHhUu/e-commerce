@@ -17,7 +17,7 @@ const productSchema = Joi.object({
     numOfReviews: Joi.array().items(
         Joi.object({
             name: Joi.string().required(),
-            rating: Joi.number().required(),
+            rating: Joi.number().max(5).required(),
             comment: Joi.string().required()
         })
     )
@@ -35,5 +35,6 @@ const userSchema = Joi.object({
     resetPasswordToken: Joi.string(),
     resetPasswordExpire: Joi.date()
 })
+
 
 module.exports = { productSchema, userSchema }

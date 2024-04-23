@@ -60,7 +60,7 @@ const productSchema = new mongoose.Schema({
             rating : {
                 type : Number,
                 required : true,
-                max : 5
+                max : [5, "Rating cannot be more than 5"]
             },
             comment : {
                 type : String,
