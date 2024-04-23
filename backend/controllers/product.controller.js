@@ -73,7 +73,7 @@ exports.createProductReview = async(req,res,next) => {
     const review = {
         user : req.user._id,
         name : req.user.name,
-        rating : Number(rating),
+        rating : Number(rating) < 5 || 5,
         comment
     }
 
@@ -114,3 +114,18 @@ exports.createProductReview = async(req,res,next) => {
         updatedProduct
     })
 }
+
+// Get all reviews of a product
+exports.getProductReviews = async (req,res,next) => {
+    const product = await Product.findById(req.query.id);
+
+    if(!product){
+        return next(new ErrorHandler(404, "Product not found"));
+    }
+
+    res.status(200).json({
+        success : true,
+        reviews : product.reviews
+    })
+}
+
