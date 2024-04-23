@@ -70,6 +70,10 @@ exports.deleteProduct = async (req,res,next)=>{
 // create new review and update review
 exports.createProductReview = async(req,res,next) => {
     const {rating, comment, productId} = req.body;
+    // rating should be less than 5
+    if(rating > 5){
+        return next(new ErrorHandler(400, "Rating should not exceed 5"));
+    }
     const review = {
         user : req.user._id,
         name : req.user.name,
