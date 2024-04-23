@@ -77,16 +77,18 @@ exports.createProductReview = async(req,res,next) => {
     const review = {
         user : req.user._id,
         name : req.user.name,
-        rating : Number(rating) < 5 || 5,
+        rating : Number(rating),
         comment
     }
 
     const product = await Product.findById(productId);
-    console.log("Product : ",product);
+    // console.log("Product : ",product);
+
     const isReviewed =  product.reviews.find((rev) =>{
         return (rev.user.toString() === req.user._id.toString())
     })
-    console.log("isReviewed : ",isReviewed);
+    // console.log("isReviewed : ",isReviewed);
+
     // if user is updating the review
     if(isReviewed){
         product.reviews.forEach((rev) => {
@@ -110,6 +112,7 @@ exports.createProductReview = async(req,res,next) => {
     product.avgRating = sum/(product.numOfReviews);
 
     const updatedProduct = await product.save({validateBeforeSave : false})
+
     if(!updatedProduct){
         return next(new ErrorHandler(500, "Something went wrong while updating review"));
     }
@@ -133,3 +136,46 @@ exports.getProductReviews = async (req,res,next) => {
     })
 }
 
+exports.deleteReview = async (req,res,next) => {
+    const {reviewId,productId} = req.query;
+
+    const product = await Product.findById(productId);
+
+    if(!product){
+        return next(new ErrorHandler(404, "Product not found"));
+    }
+
+    const reviews = product.reviews.filter((rev) => {
+        rev.id !== reviewId
+    })
+
+    
+    let sum = 0;
+    reviews.forEach((rev) => {
+        sum += rev.rating;
+    })
+    const avgRating = sum/(reviews.length);
+    const numOfReviews = reviews.length;
+    
+    const updatedReviews = await Product.findByIdAndUpdate(
+        productId,
+        {
+            reviews,
+            avgRating,
+            numOfReviews
+        },
+        {
+            new : true,
+            runValidators : true
+        }
+    )
+
+    if(!updatedReviews){
+        return next(new ErrorHandler(500, "Something went wrong while deleting review"));
+    }
+
+    res.status(200).json({
+        success : true,
+        updatedReviews
+    })
+}
