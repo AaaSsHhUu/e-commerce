@@ -146,7 +146,7 @@ exports.deleteReview = async (req,res,next) => {
     }
 
     const reviews = product.reviews.filter((rev) => {
-        rev.id !== reviewId
+        return rev._id.toString() !== reviewId.toString()
     })
 
     
@@ -154,7 +154,7 @@ exports.deleteReview = async (req,res,next) => {
     reviews.forEach((rev) => {
         sum += rev.rating;
     })
-    const avgRating = sum/(reviews.length);
+    const avgRating = Number(sum/(reviews.length));
     const numOfReviews = reviews.length;
     
     const updatedReviews = await Product.findByIdAndUpdate(
