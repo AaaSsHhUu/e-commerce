@@ -35,7 +35,22 @@ exports.newOrder = asyncHandler(async(req,res) => {
     })
 })
 
-// Admin
+
+
+exports.getMyOrders = asyncHandler(async (req,res,next) => {
+    const order = await Order.find({user : req.user._id});
+    
+    if(!order){
+        return next(new ErrorHandler(404,"No Order found"));
+    }
+    
+    res.status(200).json({
+        success : true,
+        order
+    })
+})
+
+// Admin Controllers
 exports.getSingleOrder = asyncHandler(async (req,res,next) => {
     const order = await Order.findById(req.params.id).populate("user","name email");
 
@@ -49,17 +64,22 @@ exports.getSingleOrder = asyncHandler(async (req,res,next) => {
     })
 })
 
+exports.getAllOrders = asyncHandler(async (req,res,next) => {
+    const orders = await Order.find();
 
-exports.getMyOrders = asyncHandler(async (req,res,next) => {
-    const order = await Order.find({user : req.user._id});
-
-    if(!order){
-        return next(new ErrorHandler(404,"No Order found"));
+    if(!orders){
+        return next(new ErrorHandler(404, "No Orders Found"));
     }
+
+    let totalAmount = 0;
+
+    orders.forEach((order) => {
+        totalAmount += order.totalPrice;
+    })
 
     res.status(200).json({
         success : true,
-        order
+        totalAmount,
+        orders
     })
 })
-
