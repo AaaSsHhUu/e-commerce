@@ -35,6 +35,7 @@ exports.newOrder = asyncHandler(async(req,res) => {
     })
 })
 
+// Admin
 exports.getSingleOrder = asyncHandler(async (req,res,next) => {
     const order = await Order.findById(req.params.id).populate("user","name email");
 
@@ -47,3 +48,18 @@ exports.getSingleOrder = asyncHandler(async (req,res,next) => {
         order
     })
 })
+
+
+exports.getMyOrders = asyncHandler(async (req,res,next) => {
+    const order = await Order.find({user : req.user._id});
+
+    if(!order){
+        return next(new ErrorHandler(404,"No Order found"));
+    }
+
+    res.status(200).json({
+        success : true,
+        order
+    })
+})
+
