@@ -34,3 +34,16 @@ exports.newOrder = asyncHandler(async(req,res) => {
         order
     })
 })
+
+exports.getSingleOrder = asyncHandler(async (req,res,next) => {
+    const order = await Order.findById(req.params.id).populate("user","name email");
+
+    if(!order){
+        return next(new ErrorHandler(404,"No Order found with this Id"));
+    }
+
+    res.status(200).json({
+        success : true,
+        order
+    })
+})
