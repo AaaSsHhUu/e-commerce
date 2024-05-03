@@ -1,6 +1,7 @@
 const Order = require("../models/order.model");
 const asyncHandler = require("../middleware/asyncHandler");
 const ErrorHandler = require("../utils/errorHandler");
+const Product = require("../models/product.model");
 
 exports.newOrder = asyncHandler(async(req,res) => {
     const {
@@ -83,3 +84,40 @@ exports.getAllOrders = asyncHandler(async (req,res,next) => {
         orders
     })
 })
+
+exports.updateOrder = asyncHandler(async(req,res,next) => {
+    const order = await Order.find(req.params.id);
+
+    if(!order){
+        return next(new ErrorHandler(404, "No Orders Found"));
+    }
+
+    if(order.orderStatus === "Delivered"){
+        return next(new ErrorHandler(400, "Order already Delivered"));
+    }
+
+    order.orderItems.forEach(async (order) => {
+        await updateStock(order.Product, order.quantity);
+    })
+
+    order.orderStatus = req.body.status;
+
+    if(req.body.status === "Delivered"){
+        order.deliveredAt = Date.now();
+    }
+
+    await order.save({validateBeforeSave : false})
+
+    res.status(200).json({
+        success : true,
+    })
+})
+
+async function updateStock(id, quantity){
+    const product = await Product.findById(id);
+
+    product.stock -= quantity;
+
+    product.save({validateBeforeSave : false})
+}
+
