@@ -122,7 +122,7 @@ async function updateStock(id, quantity){
 }
 
 // Delete Order
-const deleteOrder = asyncHandler( async (req,res,next) => {
+exports.deleteOrder = asyncHandler( async (req,res,next) => {
     let id = req.params.id;
 
     const order = await Order.findById(id);
