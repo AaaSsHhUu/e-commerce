@@ -1,9 +1,10 @@
 import './App.css';
+import Header from './components/layouts/Header';
 
 function App() {
   return (
     <div className="App">
-      <h1>React App</h1>
+      <Header />
     </div>
   );
 }
