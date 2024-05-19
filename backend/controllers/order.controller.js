@@ -52,6 +52,8 @@ exports.getMyOrders = asyncHandler(async (req,res,next) => {
 })
 
 // Admin Controllers
+
+// Get single order
 exports.getSingleOrder = asyncHandler(async (req,res,next) => {
     const order = await Order.findById(req.params.id).populate("user","name email");
 
@@ -65,6 +67,7 @@ exports.getSingleOrder = asyncHandler(async (req,res,next) => {
     })
 })
 
+// Get all orders
 exports.getAllOrders = asyncHandler(async (req,res,next) => {
     const orders = await Order.find();
 
@@ -85,9 +88,10 @@ exports.getAllOrders = asyncHandler(async (req,res,next) => {
     })
 })
 
+// Update Order Stock
 exports.updateOrder = asyncHandler(async(req,res,next) => {
-    const order = await Order.find(req.params.id);
-
+    const order = await Order.findById(req.params.id);
+    // console.log("order : ", order);
     if(!order){
         return next(new ErrorHandler(404, "No Orders Found"));
     }
@@ -97,7 +101,7 @@ exports.updateOrder = asyncHandler(async(req,res,next) => {
     }
 
     order.orderItems.forEach(async (order) => {
-        await updateStock(order.Product, order.quantity);
+        await updateStock(order.product, order.quantity);
     })
 
     order.orderStatus = req.body.status;
@@ -125,15 +129,10 @@ async function updateStock(id, quantity){
 exports.deleteOrder = asyncHandler( async (req,res,next) => {
     let id = req.params.id;
 
-    const order = await Order.findById(id);
-
-    if(!order){
-        return next(new ErrorHandler(404, "Order not found with this id"));
-    }
-
-    await order.remove();
-
+    const order = await Order.findByIdAndDelete(id);
+   
     res.status(200).json({
-        success : true
+        success : true,
+        deletedOrder : order
     })
 })
