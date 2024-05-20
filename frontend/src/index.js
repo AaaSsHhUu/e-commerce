@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import "./index.css";
 import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } from 'react-router-dom';
-import Header from './components/layouts/Header';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='' element={<App />}>
-        <Route path='/' element={<Header />} />
+
     </Route>
   )
 )
