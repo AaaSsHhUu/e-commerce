@@ -1,5 +1,6 @@
 import React from 'react'
 import {playStore,appStore} from '../../assets/index'
+import { AiFillInstagram, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
 
 function Footer() {
   return (
@@ -22,9 +23,18 @@ function Footer() {
         {/* Right footer */}
         <div className='flex flex-col items-center gap-3 w-[20%] '>
             <h4 className='my-4 text-2xl font-bold'>Follow Us</h4>
-            <a className='hover:underline' target='_blank' href="https://instagram.com">Instagram</a>
-            <a className='hover:underline' target='_blank' href="https://youtube.com">Youtube</a>
-            <a className='hover:underline' target='_blank' href="https://facebook.com">Facebook</a>
+            <a className='hover:underline flex items-center gap-2' target='_blank' href="https://instagram.com">
+                <AiFillInstagram size={20}/>
+                Instagram
+            </a>
+            <a className='hover:underline flex items-center gap-2' target='_blank' href="https://youtube.com">
+                <AiFillYoutube size={20}/>
+                Youtube
+            </a>
+            <a className='hover:underline flex items-center gap-2' target='_blank' href="https://facebook.com">
+                <AiFillFacebook size={20}/>
+                Facebook
+            </a>
         </div>
     </div>
   )
