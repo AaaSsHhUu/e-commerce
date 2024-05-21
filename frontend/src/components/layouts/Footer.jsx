@@ -4,7 +4,7 @@ import { AiFillInstagram, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
 
 function Footer() {
   return (
-    <div className='flex flex-col md:flex-row md:items-center bg-gray-800 mt-[10vmax] text-white p-[2vmax]'>
+    <div className='flex flex-col md:flex-row md:items-center bg-blue-950 mt-[10vmax] text-white p-[2vmax]'>
         {/* Left footer */}
         <div className='flex flex-col mt-4 items-center gap-4 w-[20%]'> 
             <h4 className='font-bold text-sm'>DOWNLOAD OUR APP</h4>
@@ -24,15 +24,15 @@ function Footer() {
         <div className='flex flex-col items-center gap-3 w-[20%] '>
             <h4 className='my-4 text-2xl font-bold'>Follow Us</h4>
             <a className='hover:underline flex items-center gap-2' target='_blank' href="https://instagram.com">
-                <AiFillInstagram size={20}/>
+                <AiFillInstagram size={30} color='#e43358'/>
                 Instagram
             </a>
             <a className='hover:underline flex items-center gap-2' target='_blank' href="https://youtube.com">
-                <AiFillYoutube size={20}/>
+                <AiFillYoutube size={30} color='red'/>
                 Youtube
             </a>
             <a className='hover:underline flex items-center gap-2' target='_blank' href="https://facebook.com">
-                <AiFillFacebook size={20}/>
+                <AiFillFacebook size={30} color='blue'/>
                 Facebook
             </a>
         </div>
