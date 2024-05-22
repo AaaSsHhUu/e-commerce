@@ -4,7 +4,7 @@ import { AiFillInstagram, AiFillYoutube, AiFillFacebook } from "react-icons/ai";
 
 function Footer() {
   return (
-    <div className='flex flex-col md:flex-row md:items-center bg-blue-950 mt-[20vh] text-white p-[2vmax]'>
+    <div className='flex flex-col md:flex-row md:items-center bg-slate-800 text-white p-[2vmax]'>
         {/* Left footer */}
         <div className='sm:flex flex-col mt-4 items-center gap-4 w-full sm:w-[20%] text-center'> 
             <h4 className='font-bold text-sm'>DOWNLOAD OUR APP</h4>
