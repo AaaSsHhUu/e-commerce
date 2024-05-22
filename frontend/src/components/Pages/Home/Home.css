@@ -1,0 +1,16 @@
+.banner{
+    min-height: 100vmin;
+    position: relative;
+}
+
+.banner::after{
+    content: "";
+    width: 100vw;
+    height: 100vmin;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-width: 100%;
+    clip-path: polygon(100% 61%, 0% 100%, 100% 100%);
+}
