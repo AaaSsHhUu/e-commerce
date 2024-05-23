@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import WebFont from "webfontloader";
 import Header from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
 
@@ -16,11 +17,13 @@ function App() {
   }, [])
 
   return (
-    <div>
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    <>
+        <Header />
+        <HelmetProvider>
+          <Outlet />
+        </HelmetProvider>
+        <Footer />
+    </>
   );
 }
 
