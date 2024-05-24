@@ -14,7 +14,7 @@ const Product = ({ product }) => {
   return (
     <>
       <Link className="mx-4 mb-4 w-[60vw] sm:w-[40vw] md:w-[20vw] flex flex-col border border-slate-300 text-start hover:shadow-2xl hover:-translate-y-2 transition-all duration-500" to={product.id}>
-        <img className="mb-2" src={product.images[0].url} />
+        <img className="mb-2" src={product.image[0].url} alt="product image" />
         <p className="text-xl my-1 mx-2">{product.name}</p>
         <div className="my-1 flex gap-2 mx-1 items-center">
           <ReactStars {...options} />

@@ -8,11 +8,14 @@ import { fetchProducts } from "../../../features/product/productSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const productsData = useSelector((state) => state.products);
+  const {loading, error, products, productCount} = useSelector((state) => {
+    // console.log("state : ", state);
+    return state.products
+  });
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -36,9 +39,10 @@ const Home = () => {
       </h1>
 
       <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6">
-        {productsData.products.map((product) => ( 
-            <Product product={product} /> 
-        ))}
+        { products && products.map((product) => { 
+          console.log(product);
+            return <Product product={product} /> 
+        })}
       </div>
     </>
   );

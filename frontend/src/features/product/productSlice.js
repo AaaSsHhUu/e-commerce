@@ -4,12 +4,13 @@ import axios from 'axios';
 const initialState = {
     products : [],
     loading : false,
-    error : null
+    error : null,
+    productCount : 0
 }
 
 export const fetchProducts = createAsyncThunk("fetchProducts", async() => {
     const response = await axios.get("/api/v1/products");
-    console.log("products : ",response.data);
+    // console.log("products data from backend : ",response.data);
     return response.data;
 })
 
@@ -23,13 +24,15 @@ const productSlice = createSlice({
         })
 
         builder.addCase(fetchProducts.fulfilled, (state,action) => {
+            // console.log("action : ", action);
             state.loading = false;
+            state.productCount = action.payload.productCount;
             state.products = action.payload.products;
         })
 
         builder.addCase(fetchProducts.rejected, (state, action) => {
             state.loading = false;
-            state.error = action.payload;
+            state.error = action.error.message;
         })
     }
 })
