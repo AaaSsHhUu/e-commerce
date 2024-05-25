@@ -6,6 +6,7 @@ import Metadata from "../../layouts/Metadata";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../features/product/productSlice";
 import Loader from "../../layouts/Loader";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,12 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch]);
+    if(error){
+      toast.error("Products Not Found!")
+    }
+  }, [dispatch,error]);
+    
+  
 
   return (
     <>
