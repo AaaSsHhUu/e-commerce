@@ -4,6 +4,9 @@ import WebFont from "webfontloader";
 import Header from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
 import { HelmetProvider } from 'react-helmet-async';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
 
@@ -18,13 +21,20 @@ function App() {
 
   return (
     <>
-        <Header />
-        <HelmetProvider>
-          <Outlet />
-        </HelmetProvider>
-        <Footer />
+      <Header />
+      <HelmetProvider>
+        <Outlet />
+        <ToastContainer position='top-center' autoClose={5000} closeOnClick={true} hideProgressBar={false} />
+      </HelmetProvider>
+      <Footer />
     </>
   );
 }
 
 export default App;
+const toastOption = {
+  position : "top-center",
+  autoClose : 5000,
+  closeOnClick : true,
+  hideProgressBar : false,
+}
