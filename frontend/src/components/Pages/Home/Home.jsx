@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import "./Home.css";
 import { LuMouse } from "react-icons/lu";
-import Product from "../../Products/Product";
-import Metadata from "../../layouts/Metadata";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../features/product/productSlice";
-import Loader from "../../layouts/Loader";
 import { toast } from "react-toastify";
+import {Product,Metadata,Loader} from '../../index';
 
 const Home = () => {
   const dispatch = useDispatch();
