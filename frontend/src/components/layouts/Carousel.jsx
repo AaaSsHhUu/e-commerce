@@ -3,9 +3,9 @@ import Slider from "react-slick";
 import { GrNext, GrPrevious } from "react-icons/gr";
 
 export default function SimpleSlider({product}) {
-  var settings = {
+  const settings = {
     dots: true,
-    infinite: true,
+    infinite: product.image.length > 1,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -20,7 +20,8 @@ export default function SimpleSlider({product}) {
           <div className="h-full">
             <img src={img.url} alt="image" />
           </div>
-      ))}
+      ))} 
+      
     </Slider>
   );
 }
