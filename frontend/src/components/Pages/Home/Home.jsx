@@ -29,7 +29,7 @@ const Home = () => {
         : 
         <>
           <Metadata title={"ECOMMERCE"} />
-          <div className="banner bg-red-500 flex flex-col items-center pt-[30%] sm:pt-[10%] text-white w-full">
+          <div className="banner bg-red-500 flex flex-col items-center  text-white w-full">
             <p className="font-bold text-2xl sm:text-3xl md:text-4xl my-4 sm:my-6">
               Welcome to Ecommerce
             </p>

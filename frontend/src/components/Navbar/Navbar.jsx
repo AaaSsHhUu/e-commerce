@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 
 function Navbar() {
   return (
-    <div className="w-full h-[100px] fixed top-0 z-20 flex justify-between items-center px-2 py-3 sm:py-4 sm:px-6">
+    <div className="w-full h-[100px] bg-red-500 sticky top-0 z-20 flex justify-between items-center px-2 py-3 sm:py-4 sm:px-6">
       {/* Sidebar */}
       <Sidebar />
       <div className="hidden sm:flex sm:items-center text-white gap-8">
