@@ -50,7 +50,7 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6">
             {products &&
               products.map((product) => {
-                console.log(product);
+                // console.log(product);
                 return <Product product={product} />;
               })}
           </div>
