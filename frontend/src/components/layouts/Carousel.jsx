@@ -9,6 +9,8 @@ export default function SimpleSlider({product}) {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay : true,
+    autoplaySpeed : 3000,
     arrows : true,
     prevArrow : <GrPrevious color="black" />,
     nextArrow : <GrNext color="black" />
@@ -17,8 +19,8 @@ export default function SimpleSlider({product}) {
   return (
     <Slider {...settings}>
       {product.image.map((img) => (
-          <div className="h-full">
-            <img src={img.url} alt="image" />
+          <div className="h-[70vh]">
+            <img src={img.url} alt="image" className="w-full" />
           </div>
       ))} 
       
