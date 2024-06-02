@@ -5,6 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../features/product/productSlice";
 import { toast } from "react-toastify";
 import {Product,Metadata,Loader} from '../../index';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { banner1, banner2, banner3 } from "../../../assets";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -29,24 +34,15 @@ const Home = () => {
         : 
         <>
           <Metadata title={"ECOMMERCE"} />
-          <div className="banner bg-red-500 flex flex-col items-center  text-white w-full">
-            <p className="font-bold text-2xl sm:text-3xl md:text-4xl my-4 sm:my-6">
-              Welcome to Ecommerce
-            </p>
-            <h1 className="font-bold text-3xl sm:text-4xl text-center md:text-5xl mt-8 sm:mt-12 mb-6">
-              Find Amazing Products Below
-            </h1>
-            <a href="#" className="">
-              <button className="flex items-center outline-none bg-white text-black gap-2 px-6 sm:text-lg font-semibold py-2 mt-4 sm:mt-6 md:mt-12 hover:bg-transparent hover:border-2 hover:border-white hover:text-white transition-all duration-500">
-                Scroll <LuMouse size={24} />
-              </button>
-            </a>
+          <div className="max-w-full h-[60vh]  mb-4 relative">
+              <HomeCarousel />
+          </div>
+          
+          <div className="my-8 w-[80%] sm:w-[50%] md:w-[30%] py-4 px-8 mx-auto border-b-2 border-b-gray-700 text-gray-700">
+              <h1 className="text-3xl font-bold text-center">Products</h1>
           </div>
 
-          <h1 className="text-xl sm:text-2xl md:text-3xl text-center w-[70%] sm:w-[50%] md:w-[30%] opacity-75 mx-auto my-6 md:my-12 border-b-2 border-b-slate-600 p-4">
-            Featured Products
-          </h1>
-
+          {/* Products */}
           <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-6">
             {products &&
               products.map((product) => {
@@ -61,3 +57,31 @@ const Home = () => {
 };
 
 export default Home;
+
+const HomeCarousel = () => {
+  const options = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay : true,
+    autoplaySpeed : 3000,
+    arrows : false,
+    // prevArrow : <GrPrevious color="black" />,
+    // nextArrow : <GrNext color="black" />
+  };
+    return (
+        <Slider {...options} className="home">
+            <div>
+                <img src={banner1} alt="banner image" className="h-[60vh] w-full" />
+            </div>
+            <div>
+                <img src={banner2} alt="banner image" className="h-[60vh] w-full" />
+            </div>
+            <div>
+                <img src={banner3} alt="banner image" className="h-[60vh] w-full" />
+            </div>
+        </Slider>
+    )
+}

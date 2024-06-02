@@ -1,12 +1,12 @@
 .banner{
-    min-height: 100vh;
+    height: calc(100vh - 80px);
     position: relative;
 }
 
 .banner::after{
     content: "";
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 80px);
     background-color: #fff;
     position: absolute;
     left: 0;
@@ -14,3 +14,24 @@
     max-width: 100%;
     clip-path: polygon(100% 61%, 0% 100%, 100% 100%);
 }
+
+.home::before{
+    z-index: 10;
+    content: "Buy Anything From Anywhere";
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2rem;
+    color: #fff;
+    background: #000;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+  }
+  
+  @media screen and (width < 640px) {
+      .home::before{
+          font-size: 1.5rem;
+      }
+  }
