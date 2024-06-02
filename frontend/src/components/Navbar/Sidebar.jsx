@@ -15,7 +15,7 @@ function Sidebar() {
       }
     },
     closed : {
-      clipPath : "circle(20px at 50px 50px)",
+      clipPath : "circle(20px at 50px 40px)",
       transition : {
         type : "spring",
         stiffness : 400,
