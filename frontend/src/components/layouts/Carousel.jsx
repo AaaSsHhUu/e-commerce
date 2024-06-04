@@ -4,7 +4,7 @@ import { GrNext, GrPrevious } from "react-icons/gr";
 
 export default function SimpleSlider({product}) {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: product.image.length > 1,
     speed: 500,
     slidesToShow: 1,
@@ -17,9 +17,9 @@ export default function SimpleSlider({product}) {
   };
 
   return (
-    <Slider {...settings}>
+    <Slider {...settings} className="mt-4 w-3/4">
       {product.image.map((img) => (
-          <div className="h-[70vh]">
+          <div>
             <img src={img.url} alt="image" className="w-full" />
           </div>
       ))} 
