@@ -7,5 +7,6 @@ import Footer from "./layouts/Footer";
 import Header from "./layouts/Header";
 import Loader from "./layouts/Loader";
 import Metadata from "./layouts/Metadata";
+import ReviewCard from "./layouts/ReviewCard";
 
-export {Navbar, Home, ProductDetails, Product, Footer, Header, Loader, Metadata, SimpleSlider};
+export {Navbar, Home, ProductDetails, Product, Footer, Header, Loader, Metadata, SimpleSlider, ReviewCard};
