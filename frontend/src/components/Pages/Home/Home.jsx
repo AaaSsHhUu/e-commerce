@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import "./Home.css";
-import { LuMouse } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../features/product/productSlice";
 import { toast } from "react-toastify";
-import {Product,Metadata,Loader} from '../../index';
+import {ProductCard,Metadata,Loader} from '../../index';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { GrNext, GrPrevious } from "react-icons/gr";
 import { banner1, banner2, banner3 } from "../../../assets";
 
 const Home = () => {
@@ -47,7 +45,7 @@ const Home = () => {
             {products &&
               products.map((product) => {
                 // console.log(product);
-                return <Product product={product} />;
+                return <ProductCard product={product} />;
               })}
           </div>
         </>
