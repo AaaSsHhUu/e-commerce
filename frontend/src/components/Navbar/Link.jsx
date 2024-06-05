@@ -36,7 +36,7 @@ const Link = () => {
     <motion.div variants={variants} className="absolute w-full h-full flex flex-col items-center justify-center gap-[20px]">
       {items.map((item) => {
         return (
-            <motion.a variants={itemVariants} whileHover={{scale : 1.1}} whileTap={{scale : 0.95}} className="text-xl hover:scale-105" href={`#${item}`} key={item}>{item}</motion.a>
+            <motion.a variants={itemVariants} whileHover={{scale : 1.1}} whileTap={{scale : 0.95}} className="text-xl hover:scale-105" href={`/${item.toLowerCase()}`} key={item}>{item}</motion.a>
         )
       })}
     </motion.div>
