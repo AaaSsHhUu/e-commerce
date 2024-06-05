@@ -58,7 +58,7 @@ function ProductDetails() {
             {/* Details block - 3*/}
                 <div className=" my-3 border-b border-b-gray-400 pb-3">
                     <h1 className="text-3xl font-bold my-4">{`₹${productDetails.product.price}`}</h1>
-                    <div className="flex items-center gap-4 border-b border-b-gray-400 pb-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 border-b border-b-gray-400 pb-3">
                         <div className="py-2">
                             <button className="text-lg font-bold bg-blue-600 hover:bg-green-600 text-white px-2 py-1">-</button>
                             <input type="number" value={1} className="px-4 py-2 text-center w-20 border-none outline-none"  />
@@ -83,10 +83,10 @@ function ProductDetails() {
         </div>
       </div>
 
-      <h3>Reviews</h3>
+      <h3 className="py-4 w-5/12 mx-auto my-4 text-2xl font-bold text-gray-600 text-center border-b border-b-slate-500">Reviews</h3>
       {productDetails.product.numOfReviews ? 
         (
-          <div className="reviews">
+          <div className="flex px-6 py-4 overflow-auto items-start gap-12 my-8 mx-12">
             { productDetails.product.reviews.map((review) => {
                 return <ReviewCard review={review} />
             }) }
