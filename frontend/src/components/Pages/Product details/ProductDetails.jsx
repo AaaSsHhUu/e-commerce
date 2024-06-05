@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Loader, ReviewCard } from "../../index";
 import ReactStars from "react-rating-stars-component";
+import { toast } from "react-toastify";
 
 function ProductDetails() {
   const dispatch = useDispatch();
@@ -18,7 +19,10 @@ function ProductDetails() {
 
   useEffect(() => {
     dispatch(fetchProductDetails(id));
-  }, [dispatch, id]);
+    if(error){
+      toast.error(error);
+    }
+  }, [dispatch, id, error]);
 
   if (error) {
     return <h1>{error}</h1>;
@@ -32,7 +36,7 @@ function ProductDetails() {
     edit: false,
     color: "rgba(20,20,20,0.1)",
     activeColor: "tomato",
-    value:  productDetails.product.numOfReviews,
+    value:  productDetails.product.avgRating,
     isHalf : true,
     size : window.innerWidth < 600 ? 20 : 25
   };
@@ -95,7 +99,7 @@ function ProductDetails() {
         )
        :
         (
-          <p>No Reviews yet!!!</p>
+          <p className="text-xl text-center font-semibold text-gray-600">No Reviews yet!!!</p>
         )
        }
     </>
