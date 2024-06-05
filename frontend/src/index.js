@@ -5,7 +5,7 @@ import "./index.css";
 import { createBrowserRouter, Route, RouterProvider, createRoutesFromElements } from 'react-router-dom';
 import {Provider} from "react-redux";
 import {store} from "./app/store";
-import { Home, ProductDetails } from './components';
+import { Home, ProductDetails, Products } from './components';
 
 
 const router = createBrowserRouter(
@@ -13,6 +13,7 @@ const router = createBrowserRouter(
     <Route path='/' element={<App />}>
         <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<ProductDetails />} />
+        <Route path='/products' element={<Products />} />
     </Route>
   )
 )
