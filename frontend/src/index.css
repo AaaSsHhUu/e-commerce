@@ -25,3 +25,7 @@ input[type="number"]::-webkit-inner-spin-button {
   background: #888; /* color of the scrollbar handle */
   border-radius: 6px; /* rounded corners for the handle */
 }
+
+.heading{
+  @apply my-8 w-[80%] sm:w-[50%] md:w-[30%] py-4 px-8 mx-auto border-b-2 border-b-gray-700 text-gray-700
+}

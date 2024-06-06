@@ -36,7 +36,7 @@ const Home = () => {
               <HomeCarousel />
           </div>
           
-          <div className="my-8 w-[80%] sm:w-[50%] md:w-[30%] py-4 px-8 mx-auto border-b-2 border-b-gray-700 text-gray-700">
+          <div className="heading">
               <h1 className="text-3xl font-bold text-center">Products</h1>
           </div>
 
