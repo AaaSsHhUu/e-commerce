@@ -11,5 +11,6 @@ import SimpleSlider from "./layouts/Carousel";
 import Loader from "./layouts/Loader";
 import Metadata from "./layouts/Metadata";
 import ReviewCard from "./layouts/ReviewCard";
+import Search from "./Pages/Product/Search";
 
-export {Navbar, Home, ProductDetails, ProductCard, Footer, Header, Loader, Metadata, SimpleSlider, ReviewCard, Products};
+export {Navbar, Home, ProductDetails, ProductCard, Footer, Header, Loader, Metadata, SimpleSlider, ReviewCard, Products, Search};
