@@ -28,9 +28,10 @@ const itemVariants = {
 const Link = () => {
     const items = [
         "Home",
+        "Search",
         "Products",
         "Contact",
-        "About"
+        "About",
     ]
   return (
     <motion.div variants={variants} className="absolute w-full h-full flex flex-col items-center justify-center gap-[20px]">
