@@ -99,7 +99,7 @@ function ProductDetails() {
         )
        :
         (
-          <p className="text-xl text-center font-semibold text-gray-600">No Reviews yet!!!</p>
+          <p className="text-xl text-center my-3 font-semibold text-gray-600">No Reviews yet!!!</p>
         )
        }
     </>
