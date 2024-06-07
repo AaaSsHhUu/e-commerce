@@ -8,8 +8,9 @@ const initialState = {
     productCount : 0
 }
 
-export const fetchProducts = createAsyncThunk("fetchProducts", async() => {
-    const response = await axios.get("/api/v1/products");
+export const fetchProducts = createAsyncThunk("fetchProducts", async(keyword="") => {
+    let link = `/api/v1/products?keyword=${keyword}`;
+    const response = await axios.get(link);
     // console.log("products data from backend : ",response.data);
     return response.data;
 })

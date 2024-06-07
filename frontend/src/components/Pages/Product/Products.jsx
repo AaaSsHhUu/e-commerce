@@ -2,15 +2,17 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {Loader, ProductCard} from '../../index';
 import { fetchProducts } from '../../../features/product/productSlice';
+import { useParams } from 'react-router-dom';
 
 const Products = () => {
     
     const dispatch = useDispatch();
     const { products, error, loading, productCount} = useSelector(state => state.products);
-    
+    const {keyword} = useParams();
+
     useEffect(() => {
-        dispatch(fetchProducts())
-    },[dispatch])
+        dispatch(fetchProducts(keyword))
+    },[dispatch,keyword])
 
     if(error || productCount === 0){
         return <h1>No Product Found</h1>
