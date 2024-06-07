@@ -16,14 +16,14 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(fetchProducts({keyword,page}))
-        },[dispatch,keyword,page])
+    },[dispatch,keyword,page])
         
     const handlePageChange = (event,value) => {
         setPage(value);
     }
     
-    if(error || productCount === 0){
-        return <h1>No Product Found</h1>
+    if(error || products.length === 0){
+        return <h1 className='heading text-3xl text-center font-bold'>😞 No Product Found</h1>
     }
 
     return (
