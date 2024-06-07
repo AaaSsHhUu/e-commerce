@@ -11,7 +11,7 @@ import { Home, ProductDetails, Products, Search } from './components';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App />}>
-        <Route path='/home' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/product/:id' element={<ProductDetails />} />
         <Route path='/products' element={<Products />} />
         <Route path='/products/:keyword' element={<Products />} />
