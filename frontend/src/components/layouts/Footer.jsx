@@ -6,11 +6,11 @@ function Footer() {
   return (
     <div className='flex flex-col md:flex-row md:items-center bg-slate-800 text-white p-[2vmax]'>
         {/* Left footer */}
-        <div className='sm:flex flex-col mt-4 items-center gap-4 w-full sm:w-[20%] text-center'> 
-            <h4 className='font-bold text-sm'>DOWNLOAD OUR APP</h4>
-            <p className='hidden sm:block text-sm mb-3'>Download App for Andriod and IOS Devices</p>
-            <img className='w-[10vmax] mx-auto my-2 cursor-pointer' src={appStore} alt="appstore" />
-            <img className='w-[10vmax] mx-auto my-2 cursor-pointer' src={playStore} alt="playstore" />
+        <div className='sm:flex flex-col mt-4 items-center gap-4 w-full md:w-[20%] text-center'> 
+            <h4 className='font-bold text-sm sm:text-xl'>DOWNLOAD OUR APP</h4>
+            <p className='hidden sm:block text-sm sm:text-xl mb-3'>Download App for Andriod and IOS Devices</p>
+            <img className='w-[100px] sm:w-[150px] mx-auto my-2 cursor-pointer' src={appStore} alt="appstore" />
+            <img className='w-[100px] sm:w-[150px] mx-auto my-2 cursor-pointer' src={playStore} alt="playstore" />
         </div>
 
         {/* Mid footer */}
