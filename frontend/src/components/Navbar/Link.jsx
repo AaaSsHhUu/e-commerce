@@ -26,14 +26,14 @@ const itemVariants = {
   },
 }
 
-const Links = () => {
+const Links = ({setOpen}) => {
   return (
     <motion.div variants={variants} className="absolute w-full h-full flex flex-col items-center justify-center gap-[20px]">
-        <Link className="text-xl hover:scale-105" to="/">Home</Link>
-        <Link className="text-xl hover:scale-105" to="/products">Products</Link>
-        <Link className="text-xl hover:scale-105" to="/contacts">Contacts</Link>
-        <Link className="text-xl hover:scale-105" to="/about">About</Link>
-        <Link className="sm:hidden text-xl hover:scale-105" to="/search">Search</Link>
+        <Link className="text-xl hover:scale-105" to="/" onClick={() => setOpen(false)}>Home</Link>
+        <Link className="text-xl hover:scale-105" to="/products" onClick={() => setOpen(false)}>Products</Link>
+        <Link className="text-xl hover:scale-105" to="/contacts" onClick={() => setOpen(false)}>Contacts</Link>
+        <Link className="text-xl hover:scale-105" to="/about" onClick={() => setOpen(false)}>About</Link>
+        <Link className="sm:hidden text-xl hover:scale-105" to="/search" onClick={() => setOpen(false)}>Search</Link>
     </motion.div>
   )
 }
