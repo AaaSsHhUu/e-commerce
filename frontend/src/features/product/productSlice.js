@@ -5,13 +5,13 @@ const initialState = {
     products : [],
     loading : false,
     error : null,
-    productCount : 0
+    productCount : 0,
+    resultPerPage : 4
 }
 
-export const fetchProducts = createAsyncThunk("fetchProducts", async(keyword="") => {
-    let link = `/api/v1/products?keyword=${keyword}`;
-    const response = await axios.get(link);
-    // console.log("products data from backend : ",response.data);
+export const fetchProducts = createAsyncThunk("fetchProducts", async({keyword="",page=1}) => {
+    const response = await axios.get(`/api/v1/products?keyword=${keyword}&page=${page}`);
+    console.log("page and keyword : ",page,keyword);
     return response.data;
 })
 
@@ -25,10 +25,11 @@ const productSlice = createSlice({
         })
 
         builder.addCase(fetchProducts.fulfilled, (state,action) => {
-            // console.log("action : ", action);
+            console.log("action : ", action);
             state.loading = false;
             state.productCount = action.payload.productCount;
             state.products = action.payload.products;
+            state.resultPerPage = action.payload.resultPerPage;
         })
 
         builder.addCase(fetchProducts.rejected, (state, action) => {
