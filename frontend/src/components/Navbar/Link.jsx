@@ -1,4 +1,5 @@
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const variants = {
     open : {
@@ -25,23 +26,26 @@ const itemVariants = {
   },
 }
 
-const Link = () => {
+const Links = () => {
     const items = [
         "Home",
-        "Search",
         "Products",
         "Contact",
         "About",
     ]
+    
   return (
     <motion.div variants={variants} className="absolute w-full h-full flex flex-col items-center justify-center gap-[20px]">
       {items.map((item) => {
         return (
+          <>
             <motion.a variants={itemVariants} whileHover={{scale : 1.1}} whileTap={{scale : 0.95}} className="text-xl hover:scale-105" href={`/${item.toLowerCase()}`} key={item}>{item}</motion.a>
+          </>
         )
-      })}
+        })}
+        <Link className="sm:hidden text-xl hover:scale-105" to="/search">Search</Link>
     </motion.div>
   )
 }
 
-export default Link
+export default Links
