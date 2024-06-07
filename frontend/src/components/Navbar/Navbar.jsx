@@ -16,7 +16,7 @@ function Navbar() {
         }
         else{
             navigate(`/products`)
-            toast.info("No such Product Found");
+            toast.info("Enter any product name");
         }
     }
   return (
@@ -39,7 +39,7 @@ function Navbar() {
                   <FaSearch color="white" size={20} cursor={"pointer"} onClick={searchSubmitHandler} />
               </div>
               <div className="md:hidden">
-                  <FaSearch size={30} cursor={"pointer"} />
+                  <FaSearch size={30} cursor={"pointer"} onClick={() => navigate("/search")}/>
               </div>
               <div>
                   <FaUserCircle size={30} cursor={"pointer"} />
