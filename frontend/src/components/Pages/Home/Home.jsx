@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import "./Home.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../features/product/productSlice";
-import { toast } from "react-toastify";
 import {ProductCard,Metadata,Loader} from '../../index';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -11,20 +10,14 @@ import { banner1, banner2, banner3 } from "../../../assets";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { loading, error, products, productCount } = useSelector((state) => {
-    // console.log("state : ", state);
-    return state.products;
-  });
+  const { loading, error, products, productCount } = useSelector((state) => state.products);
 
   useEffect(() => {
-    dispatch(fetchProducts());
-    if(error){
-      toast.error("Products Not Found!")
-    }
+    const keyword = "";
+    const page = 1;
+    dispatch(fetchProducts({keyword,page}));
   }, [dispatch,error]);
     
-  
-
   return (
     <>
       {loading ?
